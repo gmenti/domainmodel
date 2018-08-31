@@ -1,0 +1,9 @@
+grammar org.xtext.domainmodel.DomainModel with org.eclipse.xtext.common.Terminals
+
+generate domainModel "http://www.xtext.org/domainmodel/DomainModel"
+
+Model:
+	greetings+=Greeting*;
+	
+Greeting:
+	'Hello' name=ID '!';
