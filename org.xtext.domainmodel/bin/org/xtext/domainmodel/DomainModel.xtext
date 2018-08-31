@@ -3,7 +3,35 @@ grammar org.xtext.domainmodel.DomainModel with org.eclipse.xtext.common.Terminal
 generate domainModel "http://www.xtext.org/domainmodel/DomainModel"
 
 Model:
-	greetings+=Greeting*;
-	
-Greeting:
-	'Hello' name=ID '!';
+	(elements+=AbstractElement)*;
+
+PackageDeclaration:
+    'package' name=QualifiedName '{'
+        (elements+=AbstractElement)*
+    '}';
+    
+AbstractElement:
+    PackageDeclaration | Type | Import;
+    
+QualifiedName:
+    ID ('.' ID)*;
+
+Import:
+    'import' importedNamespace=QualifiedNameWithWildcard;
+    
+QualifiedNameWithWildcard:
+    QualifiedName '.*'?;
+    
+Type:
+    DataType | Entity;
+
+DataType:
+	'datatype' name=ID;
+		
+Entity:
+    'entity' name=ID ('extends' superType=[Entity|QualifiedName])? '{'
+        (features+=Feature)*
+    '}';
+     
+Feature:
+    (many?='many')? name=ID ':' type=[Type|QualifiedName];

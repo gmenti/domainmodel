@@ -8,5 +8,9 @@ Bundle-SymbolicName: org.xtext.domainmodel.ide; singleton:=true
 Bundle-ActivationPolicy: lazy
 Require-Bundle: org.xtext.domainmodel,
  org.eclipse.xtext.ide,
- org.eclipse.xtext.xbase.ide
+ org.eclipse.xtext.xbase.ide,
+ org.antlr.runtime
 Bundle-RequiredExecutionEnvironment: JavaSE-10
+Export-Package: org.xtext.domainmodel.ide.contentassist.antlr,
+ org.xtext.domainmodel.ide.contentassist.antlr.internal
+
